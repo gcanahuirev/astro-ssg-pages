@@ -3,21 +3,27 @@ set shell := ["bash", "-cu"]
 # Setup project
 [group('.')]
 setup:
-    bun install
+    bun install --frozen-lockfile
 
-# Biome lint and format
+# Check formatting and linting
 [group('.')]
-biome:
+lint:
     bun run biome:check
+
+# Apply formatting and linting
+[group('.')]
+fmt:
+    bun run biome:fix
 
 # Clean generated artifacts
 [group('.')]
 clean:
     rm -rf dist .astro .wrangler
 
-# Validation before commit/deploy
+# Run CI Workflow
 [group('.')]
-ci: biome check build
+ci:
+    bun run ci
 
 # Development
 [group('astro')]

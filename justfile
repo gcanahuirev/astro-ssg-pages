@@ -1,5 +1,10 @@
 set shell := ["bash", "-cu"]
 
+# List all available commands
+[group('.')]
+help:
+    @just --list
+
 # Setup project
 [group('.')]
 setup:
